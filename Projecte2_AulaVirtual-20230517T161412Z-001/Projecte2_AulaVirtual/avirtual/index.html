@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Aula Virtual - Projecte 2 - Aula Virtual</title>
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Aula Virtual";
+    var mkdocs_page_input_path = "avirtual/index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../introduccio/" class="icon icon-home"> Projecte 2 - Aula Virtual</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../introduccio/">Introducció</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../objectiu/">Objectiu</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../programari/">Programari</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../procediment/">Procediment</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../recursos/">Recursos necessaris</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../xarxa/">Esquema de xarxa</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../firewall/">Firewall Pfsense</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Aula Virtual</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#installacio-de-laula-virtual-i-els-contenidors-corresponents">Instal·lació de l’aula virtual i els contenidors corresponents</a></li>
+    
+
+    <li class="toctree-l2"><a href="#creacio-de-certificats-per-a-https">Creació de certificats per a HTTPS</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../siem/">Configuració SIEM</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../conclusio/">Conclusió</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../introduccio/">Projecte 2 - Aula Virtual</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../introduccio/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Aula Virtual</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="installacio-de-laula-virtual-i-els-contenidors-corresponents">Instal·lació de l’aula virtual i els contenidors corresponents</h2>
+<p>Per instal·lar el moodle, és necessari comptar amb una base de dades, i també, per agilitzar l’administració, un entorn gràfic de gestió com PhpMyAdmin.
+El programari requerit l’instal·larem en contenidors mitjançant Docker. Cada component (Moodle, MariaDB i PhpMyAdmin) anirà dins d’un contenidor diferent.
+Perquè els contenidors es puguin comunicar entre ells, crearem una Docker network, que consisteix en crear una xarxa interna entre contenidors Docker.</p>
+<p>Abans de muntar els contenidors, crearem la Docker Network, de manera que, la comanda, i la seva sortida, es veuran de la següent manera:</p>
+<p><img alt="docker1" src="docker1.png" /></p>
+<p>El nom de la nostra xarxa és moodle, i a la sortida de la comanda podem veure l’ID de la xarxa creada.</p>
+<p>Amb la xarxa docker creada, procedim a muntar la base de dades:</p>
+<p><img alt="docker2" src="docker2.png" /></p>
+<p>Primerament, llistem les imatges dels contenidors que ens hem baixat anteriorment. Quan tenim la imatge MariaDB localitzada, procedim a executar el container. Amb el paràmetre --name indiquem el nom que li volem donar al contenidor, i amb -eMARIADB_ROOT_PASSWORD indiquem la contrasenya per l’usuari root de la base de dades. Per connectar el contenidor a la xarxa docker creada anteriorment, utilitzem el paràmetre --network=moodle.</p>
+<p>Pels contenidor PhpMyAdmin i Moodle seguirem el mateix procediment:
+Contenidor PhpMyAdmin:</p>
+<p><img alt="dockernet" src="dockernetwork.png" /></p>
+<p>Contenidor Moodle:</p>
+<p><img alt="docker3" src="docker3.png" /></p>
+<p>Pel que fa al contenidor moodle, no ens hem de preocupar per l’error mostrat a la línia final, ja que només ens informa de que no s’ha pogut connectar a la base de dades. La connexió entre el moodle i la base de dades la farem més endavant.
+Si llistem els contenidors que s’estan executant, veiem que els tres components estan en marxa:</p>
+<p><img alt="docker4" src="docker4.png" /></p>
+<p>Amb els tres contenidors en funcionament, entrarem a la shell del contenidor mariadb per crear un usuari administrador amb el qual accedirem al phpmyadmin. Per fer-ho, executarem la comanda següent:</p>
+<p><img alt="docker5" src="docker5.png" /></p>
+<p>El nombre donat a continuació del paràmetre -it es correspon amb l’ID del contenidor mariadb.</p>
+<p>Per crear l’usuari, entrarem al mariadb:</p>
+<p><img alt="docker6" src="docker6.png" /></p>
+<p>Amb <strong>CREATE USER</strong> hem creat l’usuari, i amb <strong>GRANT ALL PRIVILEGES</strong>, hem assignat tots els privilegis a l’usuari creat.</p>
+<p>Si accedim a un web browser i naveguem al nostre loalchost, veiem que podem començar la instal·lació de l’aula virtual.
+Acabada la instal·lació, podem observar l’aspecte del nostre Moodle:</p>
+<p><img alt="docker7" src="docker7.png" /></p>
+<p>Posteriorment a la instal·lació, hem creat un curs i un usuari professor per administrar el curs.</p>
+<h2 id="creacio-de-certificats-per-a-https">Creació de certificats per a HTTPS</h2>
+<p>Creació certificat apache moodle:
+Un cop tenim una clau rsa dins un arxiu per al moodle podem signar qualsevol arxiu per a certificar l’encriptació de les dades.</p>
+<p><img alt="docker8" src="docker8.png" /></p>
+<p>Signem el certificat apache moodle:</p>
+<p><img alt="docker9" src="docker9.png" /></p>
+<p>Habilitem el mòdul ssl d’apache:</p>
+<p><img alt="docker10" src="docker10.png" /></p>
+<p>Afegim les rutes cap al certificat SSL en l’arxiu de configuració d’Apache:
+<img alt="docker11" src="docker11.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../siem/" class="btn btn-neutral float-right" title="Configuració SIEM">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../firewall/" class="btn btn-neutral" title="Firewall Pfsense"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../firewall/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../siem/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2023-05-17 15:47:31
+-->

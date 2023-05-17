@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Configuració SIEM - Projecte 2 - Aula Virtual</title>
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Configuraci\u00f3 SIEM";
+    var mkdocs_page_input_path = "siem/index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../introduccio/" class="icon icon-home"> Projecte 2 - Aula Virtual</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../introduccio/">Introducció</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../objectiu/">Objectiu</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../programari/">Programari</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../procediment/">Procediment</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../recursos/">Recursos necessaris</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../xarxa/">Esquema de xarxa</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../firewall/">Firewall Pfsense</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../avirtual/">Aula Virtual</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Configuració SIEM</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#installacio-i-configuracio-del-siem">Instal·lació i configuració del SIEM</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../conclusio/">Conclusió</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../introduccio/">Projecte 2 - Aula Virtual</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../introduccio/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Configuració SIEM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="installacio-i-configuracio-del-siem">Instal·lació i configuració del SIEM</h2>
+<p>Per procurar una instal·lació correcte del SIEM, i per tant, un funcionament adient, ens calen quatre eines: Elasticsearch, Kibana, Logstash i Filebeat.</p>
+<p>Començarem la instal·lació del SIEM configurant l’Elasticsearch:
+El primer pas és instal·lar l’Elasticsearch, per tant afegirem el repositori:</p>
+<pre><code class="console">root@siem:# curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+</code></pre>
+
+<p>Acte seguit, l’instal·lem:</p>
+<p><img alt="siem2" src="siem2.png" /></p>
+<p>Mitjançant l’editor nano, modifiquem les següent línies de l’arxiu de configuració <strong>elasticsearch.yml</strong>:</p>
+<p><img alt="siem3" src="siem3.png" /></p>
+<p>Seguits els passos anteriors, podem començar a instal·lar la següent eina, el Kibana:
+-Instal·lem Kibana:</p>
+<p><img alt="siem4" src="siem4.png" /></p>
+<p>-Generem una contrasenya per l’usuari kibanaadmin i la guardem al directori htpasswd.users:</p>
+<p><img alt="siem5" src="siem5.png" /></p>
+<p>-Mitjançant el web browsers entrem al Kibana:</p>
+<p><img alt="siem6" src="siem6.png" /></p>
+<p>Amb el Kibana instal·lat, procedim a instal·lar la penúltima eina, el Logstash:
+-Amb apt install instal·lem el Logstash:</p>
+<p><img alt="siem7" src="siem7.png" /></p>
+<p>-Creem i editem els arxius que redirigiran i filtraran el tràfic pel port 5044 i 9200 que ens servirà pel Filebeat:</p>
+<p><img alt="siem8" src="siem8.png" /></p>
+<p><img alt="siem9" src="siem9.png" /></p>
+<p>Amb els filtres del Logstash creats, procedim a l’últim pas, instal·lar el Filebeat:
+-El primer pas és instal·lar el filebeat:</p>
+<p><img alt="siem10" src="siem10.png" /></p>
+<p>-Editem l’arxiu de configuració filebeat.yml comentant les línies output.elasticsearch i hosts:</p>
+<p><img alt="siem11" src="siem11.png" /></p>
+<p>-Descomentem les següents línies:</p>
+<p><img alt="siem12" src="siem12.png" /></p>
+<p>-Habilitem els pipelines del logsearch:</p>
+<p><img alt="siem13" src="siem13.png" /></p>
+<p>Finalment per a que logstash rebi els logs de kibana haurem de crear un host d’entrada, i un host de sortida.</p>
+<p>Editem l’arxiu <strong>/etc/filebeat/filebeat.yml</strong>:
+-Afegim el host de Kibana (que és el SIEM):</p>
+<p><img alt="siem14" src="siem14.png" /></p>
+<p>-Afegim la sortida del Logstash (que és el SIEM):</p>
+<p><img alt="siem15" src="siem15.png" /></p>
+<p>Aquí tenim una comprovació de com el Kibana mostra els logs que ha rebut Logstash del nostre apache instal·lat a la màquina Moodle.</p>
+<p><img alt="siem16" src="siem16.png" /></p>
+<p><img alt="siem17" src="siem17.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../conclusio/" class="btn btn-neutral float-right" title="Conclusió">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../avirtual/" class="btn btn-neutral" title="Aula Virtual"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../avirtual/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../conclusio/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2023-05-17 15:47:31
+-->
